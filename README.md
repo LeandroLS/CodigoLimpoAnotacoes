@@ -45,14 +45,14 @@ A quantidade ideal de parâmetros para uma função é zero. Um a dois parâmetr
 ### Evite Efeitos Colaterais
 Efeitos colaterais são mentiras. Sua função promete fazer apenas uma coisa, mas ela também faz outras coisas escondidas. Considere essa função:
 
-function checkPassword(user, password){
-    if(user.password == password){
-         session.start();
-         return true;
-     } else {
-         return false;
-     }
-}
+    function checkPassword(user, password){
+        if(user.password == password){
+            session.start();
+            return true;
+        } else {
+            return false;
+        }
+    }
 
 O efeito colateral dessa função está em session.start(), essa função deveria apenas checar a senha do usuário, não iniciar a sessão. Se iniciar a sessão realmente for necessário, a função deveria ser renomeada para checkPassowrdAndStartSessio(), embora isso violaria a regra de "fazer apenas uma coisa".
 
@@ -61,11 +61,13 @@ Comentários é o resultado da nossa incapacidade de escrever um código express
 
 ### Explique-se no código
 Ruim: 
-//verifica se o usuário é admin
-if(employe.rule_id == 1 && employe.group_id == 1){}
 
+    //verifica se o usuário é admin
+    if(employe.rule_id == 1 && employe.group_id == 1){}
+    
 Bom:
-if(emplye.isAdmin){}
+
+    if(emplye.isAdmin){}
 
 ### Murmúrio
 Se optar por criar um comentário, então gaste o tempo necessário para fazê-lo bem feito.
@@ -73,12 +75,13 @@ Se optar por criar um comentário, então gaste o tempo necessário para fazê-l
 ### Código como comentários
 Poucas práticas são tão condenáveis quanto colocar o código como comentário. Não faça isso!
 Exemplo:
-public function index(){
-    var a = 1;
-    var b = 2;    
-    return a + b;
-   //return (a - 2) + b;
-}
+
+    public function index(){
+        var a = 1;
+        var b = 2;    
+        return a + b;
+       //return (a - 2) + b;
+    }
 
 Outros que verão esse código, não terão coragem de excluir os comentários. Eles achariam que estão lá por algum motivo e são importante demais para serem apagados.
 
@@ -90,21 +93,22 @@ Exemplo:
 
 Ruim:
 
-public function getUserData(){
-    return this.user.data;
-}
-public function logout(){
-    this.user.logout();
-}
+    public function getUserData(){
+        return this.user.data;
+    }
+    public function logout(){
+        this.user.logout();
+    }
 
 Bom:
-public function getUserData(){
-    return this.user.data;
-}
 
-public function logout(){
-    this.user.logout();
-}
+    public function getUserData(){
+        return this.user.data;
+    }
+
+    public function logout(){
+        this.user.logout();
+    }
 
 ### Distância vertical
 Os conceitos intimamente relacionados deve ficar juntos verticalmente. 
@@ -174,11 +178,14 @@ Quando você toma uma decisão em seu código, certifique-se de fazê-la precisa
 
 ### Encapsule as condições de limites
 Condições de limite são difíceis de acompanhar. Coloque o processamento para elas em um único lugar. Não as deixe espalhadas pelo código. Não queremos um enxame de +1 e -1 aparecendo pelo código. Considere o exemplo:
+
     if(level + 1 < tags.length){
         parts = new Parse(body, tags, level + 1, offset + endTag);
         body = null;
     }
+    
 Note que 'level +1' aparece duas vezes. Essa é uma condição de limite que deveria estar encapsulada dentro de uma variável com um nome ou algo como 'nextLevel'
+
     int nextLevel = level + 1;
     if(nextLevel < tags.length){
          parts =  new Parse(body, tags, level + 1, offset + endTag);
