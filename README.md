@@ -1,4 +1,4 @@
-# Anotações do Livro Código Limpo
+# Anotações do Livro Código Limpo 📖
 Esse repositório passagens interessantes que achei no livro Código Limpo do autor Robert Cecil Martin.
 
 ## Código Limpo
